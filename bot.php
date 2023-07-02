@@ -2,23 +2,21 @@
 include_once 'baseInfo.php';
 include_once 'config.php';
 include_once 'settings/jdf.php';
-
 check();
 
 $robotState = $botState['botState']??"on";
- if($userInfo['step'] == "banned" && $from_id != $admin && $userInfo['isAdmin'] != true){
-     sendMessage("❌ | هی بهت گفتم آدم باش گوش نکردی ، الان مسدود شدی 😑😂");
-     exit();
- }
+if($userInfo['step'] == "banned" && $from_id != $admin && $userInfo['isAdmin'] != true){
+    sendMessage("❌ | هی بهت گفتم آدم باش گوش نکردی ، الان مسدود شدی 😑😂");
+    exit();
+}
 if ($joniedState== "kicked" || $joniedState== "left"){
     sendMessage("
-❌ برای استفاده از ربات حتما باید در کانال زیر عضو شوید:
+<b>❌ برای استفاده از ربات حتما باید تو کانالم عضو باشی:
 
 🆔 $channelLock
-
+        
 ✅ بعد از اینکه عضو شدید مجدد ربات رو /start کنید و لذت ببرید
-
-🌀 @ ( Support us 💕 )
+ </b>
 ", null,"HTML");
     exit;
 }
@@ -27,7 +25,7 @@ if($robotState == "off" && $from_id != $admin){
     exit();
 }
 if(strpos($text, "/start ") !== false){
-    $inviter = str_replace("/start ", "", $text);
+    $inviter = str_replace("/start ", null, $text);
     
     if($uinfo->num_rows == 0 && $inviter != $from_id){
         
@@ -105,25 +103,25 @@ if (preg_match('/^\/([Ss]tart)/', $text) or $text == '⤵️ برگرد به م�
         $stmt->close();
     }
     if(isset($data) and $data == "mainMenu"){
-        $res = editText($message_id, 'سلااام به ربات ویزویز خوش اومدی 🫡🌸
+        $res = editText($message_id, 'سلاااام چطوری خوبی؟ به ربات ممد خوش اومدی🫡
 
-ما اینجاییم تا شما را بدون هیچ محدویتی به شبکه جهانی متصل کنیم ❤️
-
-✅ کیفیت در ساخت انواع کانکشن ها
-📡 برقرای امنیت در ارتباط شما
-☎️ پشتیبانی تا روز آخر 
-
+چکار میخوای برات انجام بدم؟
+اگه نیاز به یه فندق شکن خفن داشتی میتونی روی خرید کانفیگ جدید کلیک کنی تا برات سرور اختصاصی خودتو بسازم☺️
+                
+                
+☎️راستی اگه کارم داشتی(نیاز به راهنمایی بیشتر داشتی) تیکت ثبت کن سر فرصت همشونو جواب میدم.
+                
 🚪 /start
 ', $mainKeys);
         if(!$res->ok){
-            sendMessage('سلااام به ربات ویزویز خوش اومدی 🫡🌸
+            sendMessage('سلاااام چطوری خوبی؟ به ربات *ممد* خوش اومدی🫡
 
-ما اینجاییم تا شما را بدون هیچ محدویتی به شبکه جهانی متصل کنیم ❤️
-
-✅ کیفیت در ساخت انواع کانکشن ها
-📡 برقرای امنیت در ارتباط شما
-☎️ پشتیبانی تا روز آخر 
-
+چکار میخوای برات انجام بدم؟
+اگه نیاز به یه فندق شکن خفن داشتی میتونی روی *خرید کانفیگ جدید* کلیک کنی تا برات سرور اختصاصی خودتو بسازم☺️
+                        
+                        
+☎️راستی اگه کارم داشتی(نیاز به راهنمایی بیشتر داشتی) *تیکت* ثبت کن سر فرصت همشونو جواب میدم.
+                    
 🚪 /start
 ', $mainKeys);
         }
@@ -145,14 +143,14 @@ if (preg_match('/^\/([Ss]tart)/', $text) or $text == '⤵️ برگرد به م�
             ",
             $keys, "html",$admin);
         }
-        sendMessage('سلااام به ربات ویزویز خوش اومدی 🫡🌸
+        sendMessage('سلاااام چطوری خوبی؟ به ربات *ممد* خوش اومدی🫡
 
-ما اینجاییم تا شما را بدون هیچ محدویتی به شبکه جهانی متصل کنیم ❤️
-
-✅ کیفیت در ساخت انواع کانکشن ها
-📡 برقرای امنیت در ارتباط شما
-☎️ پشتیبانی تا روز آخر 
-
+چکار میخوای برات انجام بدم؟
+اگه نیاز به یه فندق شکن خفن داشتی میتونی روی *خرید کانفیگ جدید* کلیک کنی تا برات سرور اختصاصی خودتو بسازم☺️
+                
+                
+☎️راستی اگه کارم داشتی(نیاز به راهنمایی بیشتر داشتی) *تیکت* ثبت کن سر فرصت همشونو جواب میدم.
+                
 🚪 /start
 ',$mainKeys);
     }
@@ -201,7 +199,7 @@ if($userInfo['step'] == "addNewAdmin" && $from_id === $admin && $text != $cancel
         
         sendMessage("لیست ادمین ها",getAdminsKeys());
     }else{
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
     }
 }
 if(($data=="botSettings" or preg_match("/^changeBot(\w+)/",$data,$match)) && ($from_id == $admin || $userInfo['isAdmin'] == true)){
@@ -443,7 +441,7 @@ if($userInfo['step'] == "editInviteAmount"){
             ]]); 
         sendMessage("✅ تنظیمات بازاریابی",$keys);
         setUser();
-    }else sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+    }else sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
 }
 if($userInfo['step'] == "editRewardTime" && ($from_id == $admin || $userInfo['isAdmin'] == true) && $text != $cancelText){
     if(!is_numeric($text)){
@@ -514,27 +512,27 @@ if($data=="myInfo"){
     
     $keys = json_encode(['inline_keyboard'=>[
         [
-            ['text'=>$from_id,'callback_data'=>"wizwizch"],
-            ['text'=>"آیدی عددی",'callback_data'=>"wizwizch"]
+            ['text'=>$from_id,'callback_data'=>"increaseMyWallet"],
+            ['text'=>"آیدی عددی",'callback_data'=>"transferMyWallet"]
         ],
         [
-            ['text'=>"@$username",'callback_data'=>"wizwizch"],
-            ['text'=>"یوزرنیم",'callback_data'=>"wizwizch"]
+            ['text'=>"@$username",'callback_data'=>"increaseMyWallet"],
+            ['text'=>"یوزرنیم",'callback_data'=>"transferMyWallet"]
         ],
         [
-            ['text'=>$first_name,'callback_data'=>"wizwizch"],
-            ['text'=>"اسم",'callback_data'=>"wizwizch"]
+            ['text'=>$first_name,'callback_data'=>"increaseMyWallet"],
+            ['text'=>"اسم",'callback_data'=>"transferMyWallet"]
         ],
         [
-            ['text'=>$totalBuys,'callback_data'=>"wizwizch"],
-            ['text'=>"تعداد خرید ها",'callback_data'=>"wizwizch"]
+            ['text'=>$totalBuys,'callback_data'=>"increaseMyWallet"],
+            ['text'=>"تعداد خرید ها",'callback_data'=>"transferMyWallet"]
         ],
         [
-            ['text'=>$myWallet,'callback_data'=>"wizwizch"],
-            ['text'=>"موجودی کیف پول",'callback_data'=>"wizwizch"]
+            ['text'=>$myWallet,'callback_data'=>"increaseMyWallet"],
+            ['text'=>"موجودی کیف پول",'callback_data'=>"transferMyWallet"]
         ],
         [
-            ['text'=>"🔻🔻🔻🔻",'callback_data'=>"wizwizch"],
+            ['text'=>"🔻🔻🔻🔻",'callback_data'=>"increaseMyWallet"],
         ],
         [
             ['text'=>"شارژ کیف پول 💰",'callback_data'=>"increaseMyWallet"],
@@ -566,7 +564,7 @@ if($userInfo['step'] =="transferMyWallet" && $text != $cancelText){
                 sendMessage("لطفا مبلغ مورد نظر رو وارد کن");
             }else sendMessage("کاربری با این آیدی یافت نشد");
         }else sendMessage("میخای به خودت انتقال بدی ؟؟");
-    }else sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+    }else sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
 }
 if(preg_match('/^tranfserUserAmount(\d+)/',$userInfo['step'],$match) && $text != $cancelText){
     if(is_numeric($text)){
@@ -586,7 +584,7 @@ if(preg_match('/^tranfserUserAmount(\d+)/',$userInfo['step'],$match) && $text !=
             sendMessage("✅|مبلغ " . number_format($text) . " تومان به کیف پول کاربر مورد نظر شما انتقال یافت",$removeKeyboard);
             sendMessage("لطفا یکی از کلید های زیر را انتخاب کنید",$mainKeys);
         }else sendMessage("موجودی حساب شما کم است");
-    }else sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+    }else sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
 }
 if($data=="increaseMyWallet"){
     delMessage();
@@ -595,7 +593,7 @@ if($data=="increaseMyWallet"){
 }
 if($userInfo['step'] == "increaseMyWallet" && $text != $cancelText){
     if(!is_numeric($text)){
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
         exit();
     }
     elseif($text < 5000){
@@ -665,11 +663,15 @@ if(preg_match('/increaseWalletWithCartToCart/',$data)) {
 
     delMessage();  
     setUser($data);
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
 
-✅ بعد از اینکه پرداختت تایید شد مبلغ مورد نظر به کیف پولت اضافه میشه!",$cancelKey, "HTML");
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+    
+    
+✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!
+     </b>",$cancelKey, "HTML");
     exit;
 }
 if(preg_match('/increaseWalletWithCartToCart(\d+)/',$userInfo['step'], $match) and $text != $cancelText){
@@ -775,7 +777,7 @@ if($userInfo['step'] == "increaseUserWallet" && ($from_id == $admin || $userInfo
 🚪 /start',$mainKeys);
         }
     }else{
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
     }
 }
 if(preg_match('/^increaseWalletUser(\d+)/',$userInfo['step'], $match) && $text != $cancelText && ($from_id == $admin || $userInfo['isAdmin'] == true)){
@@ -792,7 +794,7 @@ if(preg_match('/^increaseWalletUser(\d+)/',$userInfo['step'], $match) && $text !
 🚪 /start',$mainKeys);
         setUser();
     }else{
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
     }
 }
 if($data=="editRewardChannel" && ($from_id == $admin || $userInfo['isAdmin'] == true)){
@@ -985,12 +987,12 @@ if(preg_match('/^createAccDate(\d+)/',$userInfo['step'],$match) && $text != $can
             sendMessage("عدد باید بیشتر از 0 باشه");
         }
     }else{
-        sendMessage('😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟');
+        sendMessage('😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام');
     }
 }
 if(preg_match('/^createAccVolume(\d+)_(\d+)/',$userInfo['step'],$match) && $text != $cancelText){
     if(!is_numeric($text)){
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
         exit();
     }elseif($text <=0){
         sendMessage("مقداری بزرگتر از 0 وارد کن");
@@ -1004,7 +1006,7 @@ if(preg_match('/^createAccVolume(\d+)_(\d+)/',$userInfo['step'],$match) && $text
 }
 if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) && $text != $cancelText){
     if(!is_numeric($text)){
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
         exit();
     }elseif($text <=0){
         sendMessage("مقداری بزرگتر از 0 وارد کن");
@@ -1099,7 +1101,7 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
 	    (`userid`, `token`, `transid`, `fileid`, `server_id`, `inbound_id`, `remark`, `protocol`, `expire_date`, `link`, `amount`, `status`, `date`, `notif`, `rahgozar`)
 	    VALUES (?, ?, '', ?, ?, ?, ?, ?, ?, ?, ?,1, ?, 0, ?);");
     for($i = 1; $i<= $text; $i++){
-        $token = RandomString(30);
+        
         $uniqid = generateRandomString(42,$protocol); 
         if($portType == "auto"){
             $port++;
@@ -1131,14 +1133,15 @@ if(preg_match('/^createAccAmount(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) &
         }
     
         $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id, $rahgozar);
-        $subLink = $botUrl . "settings/subLink.php?token=" . $token;
+        
+        $smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
         foreach($vraylink as $vray_link){
             $acc_text = "
     
         🔮 $remark \n <code>$vray_link</code>
             ";
             if($botState['subLinkState'] == "on") $acc_text .= 
-            " \n🌐 subscription : <code>$subLink</code>";
+            " \n🌐 subscription : <code>$smartsubm</code>";
         
             $file = RandomString() .".png";
             QRcode::png($vray_link, $file, $ecc, $pixel_Size, $frame_Size);
@@ -1209,62 +1212,25 @@ if(preg_match('/payWithCartToCart(.*)/',$data,$match)) {
     
     setUser($data);
     delMessage();
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
 
-✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!",$cancelKey, "HTML");
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+        
+        
+✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!
+         </b>",$cancelKey, "HTML");
     exit;
 }
 if(preg_match('/payWithWeSwap(.*)/',$data,$match)) {
+    delMessage();
+    sendMessage("لطفا منتظر باشید",$removeKeyboard);
     $stmt = $connection->prepare("SELECT * FROM `pays` WHERE `hash_id` = ?");
     $stmt->bind_param("s", $match[1]);
     $stmt->execute();
     $payInfo = $stmt->get_result()->fetch_assoc();
     $stmt->close();
-    
-    $fid = $payInfo['plan_id'];
-    $type = $payInfo['type'];
-
-    $stmt = $connection->prepare("SELECT * FROM `server_plans` WHERE `id`=?");
-    $stmt->bind_param("i", $fid);
-    $stmt->execute();
-    $file_detail = $stmt->get_result()->fetch_assoc();
-    $stmt->close();
-    
-    $server_id = $file_detail['server_id'];
-    $acount = $file_detail['acount'];
-    $inbound_id = $file_detail['inbound_id'];
-
-
-    if($type != "INCREASE_WALLET" && $type != "RENEW_ACCOUNT"){
-        if($acount == 0 and $inbound_id != 0){
-            alert('ظرفیت این کانکشن پر شده است');
-            exit;
-        }
-    if($inbound_id == 0) {
-        $stmt = $connection->prepare("SELECT * FROM `server_info` WHERE `id`=?");
-        $stmt->bind_param("i", $server_id);
-        $stmt->execute();
-        $server_info = $stmt->get_result()->fetch_assoc();
-        $stmt->close();
-
-        if($server_info['ucount'] == 0) {
-            alert('ظرفیت این سرور پر شده است');
-            exit; 
-        }
-    }else{
-        if($acount == 0){
-            alert('ظرفیت این سرور پر شده است');
-            exit();
-        }
-    }
-}
-
-    
-    delMessage();
-    sendMessage("لطفا منتظر باشید",$removeKeyboard);
-    
     
     $price = $payInfo['price'];
     $rate = json_decode(file_get_contents("https://api.weswap.digital/api/rate"),true)['result'];
@@ -1289,14 +1255,7 @@ if(preg_match('/payWithWeSwap(.*)/',$data,$match)) {
             [['text'=>"پرداخت با درگاه وی سواپ",'url'=>"https://weswap.digital/quick?amount=$priceInTrx&currency=TRX&address=$payAddress"]],
             [['text'=>"پرداخت کردم ✅",'callback_data'=>"havePaiedWeSwap" . $match[1]]]
             ]]);
-sendMessage("
-✅ لینک پرداخت با موفقیت ایجاد شد
-
-💰مبلغ : " . $priceInTrx . " ترون
-
-✔️ بعد از پرداخت حدود 1 الی 15 دقیقه صبر کنید تا پرداخت به صورت کامل انجام شود سپس روی پرداخت کردم کلیک کنید
-⁮⁮ ⁮⁮
-",$keys);
+        sendMessage("لطفا مبلغ " . $priceInTrx . " ترون توسط لینک زیر پرداخت کنید، بعد از پرداخت حدود 1 الی 15 دقیقه صبر کنید تا پرداخت به صورت کامل انجام شود سپس روی پرداخت کردم کلیک کنید ",$keys);
     }else{
         if($pay->statusCode == 400){
             sendMessage("مقدار انتخاب شده کمتر از حد مجاز است");
@@ -1330,8 +1289,7 @@ $stmt->bind_param("ii", $price, $from_id);
 $stmt->execute();
 $stmt->close();
 
-    sendMessage("افزایش حساب شما با موفقیت تأیید شد\n✅ مبلغ " . number_format($price). " تومان به حساب شما اضافه شد");
-    sendMessage("✅ مبلغ " . number_format($price) . " تومان به کیف پول کاربر $from_id توسط درگاه وی سواپ اضافه شد",null,null,$admin);
+sendMessage("افزایش حساب شما با موفقیت تأیید شد\n✅ مبلغ " . number_format($price). " تومان به حساب شما اضافه شد");
 }
 elseif($payType == "BUY_SUB"){
 $uid = $from_id;
@@ -1454,8 +1412,9 @@ if(!$response->success){
 alert('🚀 | 😍 در حال ارسال کانفیگ به مشتری ...');
 
 include 'phpqrcode/qrlib.php';
-$token = RandomString(30);
-$subLink = $botUrl . "settings/subLink.php?token=" . $token;
+
+
+$smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
 
 $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id, $rahgozar);
 foreach($vraylink as $vray_link){
@@ -1470,7 +1429,7 @@ $acc_text = "
 💝 config : <code>$vray_link</code>";
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-🌐 subscription : <code>$subLink</code>
+🌐 subscription : <code>$smartsubm</code>
 
 ";
       
@@ -1724,7 +1683,7 @@ if($data=="messageToSpeceficUser" && ($from_id == $admin || $userInfo['isAdmin']
 }
 if($userInfo['step'] == "messageToSpeceficUser" && $text != $cancelText && ($from_id == $admin || $userInfo['isAdmin'] == true)){
     if(!is_numeric($text)){
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
         exit();
     }
     $stmt = $connection->prepare("SELECT * FROM `users` WHERE `userid` = ?");
@@ -1841,7 +1800,7 @@ if(preg_match('/selectCategory(\d+)_(\d+)/',$data,$match) && ($botState['sellSta
             $keyboard[] = ['text' => "$name - $price", 'callback_data' => "selectPlan{$id}_{$call_id}"];
         }
         if($botState['plandelkhahState'] == "on"){
-	        $keyboard[] = ['text' => '➕ پلن دلخواه تو بخر', 'callback_data' => "selectCustomPlan{$call_id}_{$sid}"];
+	        $keyboard[] = ['text' => '➕ پلن دلخواهتو بساز', 'callback_data' => "selectCustomPlan{$call_id}_{$sid}"];
         }
         $keyboard[] = ['text' => '⤵️ برگرد صفحه قبلی ', 'callback_data' => "selectServer$sid"];
         $keyboard = array_chunk($keyboard,1);
@@ -1886,78 +1845,77 @@ if(preg_match('/selectCustomPlanGB(\d+)_(\d+)/',$userInfo['step'], $match) && ($
         exit();
     }
     $id = $match[1];
-    
 	sendMessage("⏰|لطفا  تعداد روز اشتراکت رو وارد کن\n💰|هزینه هر روز: " . $botState['dayPrice']);
 	setUser("selectCustomPlanDay" . $match[1] . "_" . $match[2] . "_" . $text);
 }
 if((preg_match('/^discountCustomPlanDay(\d+)_(\d+)_(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match) || preg_match('/selectCustomPlanDay(\d+)_(\d+)_(\d+)/',$userInfo['step'], $match)) && ($botState['sellState']=="on" ||$from_id ==$admin) && $text != $cancelText){
-    if(preg_match('/^discountCustomPlanDay/', $userInfo['step'])){
-        $days = $match[4];
-        $rowId = $match[5];
-        
-        $time = time();
-        $stmt = $connection->prepare("SELECT * FROM `discounts` WHERE (`expire_date` > $time OR `expire_date` = 0) AND (`expire_count` > 0 OR `expire_count` = -1) AND `hash_id` = ?");
-        $stmt->bind_param("s", $text);
-        $stmt->execute();
-        $list = $stmt->get_result();
-        $stmt->close();
-        
-        $stmt = $connection->prepare("SELECT * FROM `pays` WHERE `id` = ?");
-        $stmt->bind_param("i", $rowId);
-        $stmt->execute();
-        $payInfo = $stmt->get_result()->fetch_assoc();
-        $hash_id = $payInfo['hash_id'];
-        $price = $payInfo['price'];
-        $stmt->close();
-            
-        if($list->num_rows>0){
-            $discountInfo = $list->fetch_assoc();
-            $amount = $discountInfo['amount'];
-            $type = $discountInfo['type'];
-            $count = $discountInfo['expire_count'];
-            $usedBy = !is_null($discountInfo['used_by'])?json_decode($discountInfo['used_by'],true):array();
-        if(!in_array($from_id, $usedBy)){
-            $usedBy[] = $from_id;
-            $encodeUsedBy = json_encode($usedBy);
-            
-            if ($count != -1) $query = "UPDATE `discounts` SET `expire_count` = `expire_count` - 1, `used_by` = ? WHERE `id` = ?";
-            else $query = "UPDATE `discounts` SET `used_by` = ? WHERE `id` = ?";
-        
-            $stmt = $connection->prepare($query);
-            $stmt->bind_param("si", $encodeUsedBy, $discountInfo['id']);
-            $stmt->execute();
-            $stmt->close();
-            
-            if($type == "percent"){
-                $discount = $price * $amount / 100;
-                $price -= $discount;
-                $discount = number_format($discount) . " تومان";
-            }else{
-                $price -= $amount;
-                $discount = number_format($amount) . " تومان";
-            }
-            if($price < 0) $price = 0;
-            
-            $stmt = $connection->prepare("UPDATE `pays` SET `price` = ? WHERE `id` = ?");
-            $stmt->bind_param("ii", $price, $rowId);
-            $stmt->execute();
-            $stmt->close();
-            sendMessage(" ✅|کد تخفیف با موفقیت استفاده شد\nمقدار تخفیف $discount");
-            $keys = json_encode(['inline_keyboard'=>[
-                [
-                    ['text'=>"❤️", "callback_data"=>"wizwizch"]
-                    ],
-                ]]);
-        sendMessage("
-         ☑️|🎁 کد تخفیف استفاده شد
-        
-        🔰آیدی کاربر: $from_id
-        👨‍💼اسم کاربر: $first_name
-        ⚡️ نام کاربری: $username
-        🎁 کد تخفیف: $text
-        💰مقدار تخفیف: $discount
-        ⁮⁮ ⁮⁮
-        ",$keys,null,$admin);
+if(preg_match('/^discountCustomPlanDay/', $userInfo['step'])){
+    $day = $match[4];
+    $rowId = $match[5];
+    
+    $time = time();
+    $stmt = $connection->prepare("SELECT * FROM `discounts` WHERE (`expire_date` > $time OR `expire_date` = 0) AND (`expire_count` > 0 OR `expire_count` = -1) AND `hash_id` = ?");
+    $stmt->bind_param("s", $text);
+    $stmt->execute();
+    $list = $stmt->get_result();
+    $stmt->close();
+    
+    $stmt = $connection->prepare("SELECT * FROM `pays` WHERE `id` = ?");
+    $stmt->bind_param("i", $rowId);
+    $stmt->execute();
+    $payInfo = $stmt->get_result()->fetch_assoc();
+    $hash_id = $payInfo['hash_id'];
+    $price = $payInfo['price'];
+    $stmt->close();
+    
+if($list->num_rows>0){
+    $discountInfo = $list->fetch_assoc();
+    $amount = $discountInfo['amount'];
+    $type = $discountInfo['type'];
+    $count = $discountInfo['expire_count'];
+    $usedBy = !is_null($discountInfo['used_by'])?json_decode($discountInfo['used_by'],true):array();
+if(!in_array($from_id, $usedBy)){
+    $usedBy[] = $from_id;
+    $encodeUsedBy = json_encode($usedBy);
+    
+    if ($count != -1) $query = "UPDATE `discounts` SET `expire_count` = `expire_count` - 1, `used_by` = ? WHERE `id` = ?";
+    else $query = "UPDATE `discounts` SET `used_by` = ? WHERE `id` = ?";
+
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("si", $encodeUsedBy, $discountInfo['id']);
+    $stmt->execute();
+    $stmt->close();
+    
+    if($type == "percent"){
+        $discount = $price * $amount / 100;
+        $price -= $discount;
+        $discount = number_format($discount) . " تومان";
+    }else{
+        $price -= $amount;
+        $discount = number_format($amount) . " تومان";
+    }
+    if($price < 0) $price = 0;
+    
+    $stmt = $connection->prepare("UPDATE `pays` SET `price` = ? WHERE `id` = ?");
+    $stmt->bind_param("ii", $price, $rowId);
+    $stmt->execute();
+    $stmt->close();
+    sendMessage(" ✅|کد تخفیف با موفقیت استفاده شد\nمقدار تخفیف $discount");
+    $keys = json_encode(['inline_keyboard'=>[
+        [
+            ['text'=>"❤️", "callback_data"=>"wizwizch"]
+            ],
+        ]]);
+sendMessage("
+ ☑️|🎁 کد تخفیف استفاده شد
+
+🔰آیدی کاربر: $from_id
+👨‍💼اسم کاربر: $first_name
+⚡️ نام کاربری: $username
+🎁 کد تخفیف: $text
+💰مقدار تخفیف: $discount
+⁮⁮ ⁮⁮
+",$keys,null,$admin);
             }else sendMessage("😔|کد تخفیفی که وارد کردی معتبر نیس");
         }else sendMessage("😔|کد تخفیفی که وارد کردی معتبر نیس");
     }else{
@@ -1969,7 +1927,7 @@ if((preg_match('/^discountCustomPlanDay(\d+)_(\d+)_(\d+)_(\d+)_(\d+)/',$userInfo
             sendMessage("لطفا عددی بزرگتر از 0 وارد کن");
             exit();
         }
-	    $days = $text;
+	    $day = $text;
     }
     $id = $match[1];
 	$call_id = $match[2];
@@ -1994,7 +1952,7 @@ if((preg_match('/^discountCustomPlanDay(\d+)_(\d+)_(\d+)_(\d+)_(\d+)/',$userInfo
     $temp = array();
     
     if(!preg_match('/^discountCustomPlanDay/', $userInfo['step'])){
-        $price =  $volume * $botState['gbPrice'] + $days * $botState['dayPrice'];
+        $price =  $volume * $botState['gbPrice'] + $day * $botState['dayPrice'];
         $hash_id = RandomString();
         $stmt = $connection->prepare("DELETE FROM `pays` WHERE `user_id` = ? AND `type` = 'BUY_SUB' AND `state` = 'pending'");
         $stmt->bind_param("i", $from_id);
@@ -2004,7 +1962,7 @@ if((preg_match('/^discountCustomPlanDay(\d+)_(\d+)_(\d+)_(\d+)_(\d+)/',$userInfo
         $time = time();
         $stmt = $connection->prepare("INSERT INTO `pays` (`hash_id`, `user_id`, `type`, `plan_id`, `volume`, `day`, `price`, `request_date`, `state`)
                                     VALUES (?, ?, 'BUY_SUB', ?, ?, ?, ?, ?, 'pending')");
-        $stmt->bind_param("siiiiii", $hash_id, $from_id, $id, $volume, $days, $price, $time);
+        $stmt->bind_param("siiiiii", $hash_id, $from_id, $id, $volume, $day, $price, $time);
         $stmt->execute();
         $rowId = $stmt->insert_id;
         $stmt->close();
@@ -2052,7 +2010,7 @@ if((preg_match('/^discountCustomPlanDay(\d+)_(\d+)_(\d+)_(\d+)_(\d+)/',$userInfo
     sendMessage("
 〽️ نام پلن: $name
 حجم اختصاصی: $volume GB
-مدت اختصاصی: $days روز
+مدت اختصاصی: $day روز
 ➖➖➖➖➖➖➖
 💎 قیمت پنل : $price
 ➖➖➖➖➖➖➖
@@ -2102,7 +2060,7 @@ if($data=="getTestAccount"){
         editText($message_id,"لطفا یکی از کلید های زیر را انتخاب کنید", json_encode(['inline_keyboard'=>$keyboard]), "HTML");
     }else alert("این بخش موقتا غیر فعال است");
 }
-if((preg_match('/^discountSelectPlan(\d+)_(\d+)_(\d+)/',$userInfo['step'],$match) || preg_match('/selectPlan(\d+)_(\d+)/',$data, $match)) && ($botState['sellState']=="on" ||$from_id ==$admin) && $text != $cancelText){
+if((preg_match('/^discountSelectPlan(\d+)_(\d+)_(\d+)/',$userInfo['step'],$match) || preg_match('/selectPlan(\d+)_(\d+)/',$data, $match)) && ($botState['sellState']=="on" ||$from_id ==$admin)){
     if(preg_match('/^discountSelectPlan/', $userInfo['step'])){
         $rowId = $match[3];
         
@@ -2264,11 +2222,13 @@ if((preg_match('/^discountSelectPlan(\d+)_(\d+)_(\d+)/',$userInfo['step'],$match
     sendMessage("
 〽️ نام پلن: $name
 ➖➖➖➖➖➖➖
-💎 قیمت پنل : $price
+<b>💎 قیمت پنل : $price</b>
 ➖➖➖➖➖➖➖
 📃 توضیحات :
 $desc
 ➖➖➖➖➖➖➖
+<b>آموزش پرداخت از طریق درگاه وی سواپ:
+https://t.me/v2rayMB/62 </b>
 ", json_encode(['inline_keyboard'=>$keyboard]), "HTML");
 }
 if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
@@ -2408,8 +2368,9 @@ if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
     $stmt->bind_param("ii", $price, $uid);
     $stmt->execute();
     include 'phpqrcode/qrlib.php';
-    $token = RandomString(30);
-    $subLink = $botUrl . "settings/subLink.php?token=" . $token;
+    
+    
+    $smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
     
     $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id, $rahgozar);
     delMessage();
@@ -2424,7 +2385,7 @@ if(preg_match('/payCustomWithWallet(.*)/',$data, $match)){
 💝 config : <code>$vray_link</code>";
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-🌐 subscription : <code>$subLink</code>"; 
+🌐 subscription : <code>$smartsubm</code>"; 
     
         $file = RandomString() .".png";
         $ecc = 'L';
@@ -2531,11 +2492,15 @@ if(preg_match('/payCustomWithCartToCart(.*)/',$data, $match)) {
     
     setUser($data);
     delMessage();
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
 
-✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!",$cancelKey, "HTML");
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+        
+        
+✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!
+         </b>",$cancelKey, "HTML");
     exit;
 }
 if(preg_match('/payCustomWithCartToCart(.*)/',$userInfo['step'], $match) and $text != $cancelText){
@@ -2552,7 +2517,7 @@ if(preg_match('/payCustomWithCartToCart(.*)/',$userInfo['step'], $match) and $te
     
     $fid = $payInfo['plan_id'];
     $volume = $payInfo['volume'];
-    $days = $payInfo['day'];
+    $day = $payInfo['day'];
     
     setUser();
     $uid = $userInfo['userid'];
@@ -2592,7 +2557,7 @@ if(preg_match('/payCustomWithCartToCart(.*)/',$userInfo['step'], $match) and $te
 💰مبلغ پرداختی: $fileprice تومان
 ✏️ نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
-⏰ مدت سرویس: $days روز
+⏰ مدت سرویس: $day روز
 ⁮⁮ ⁮⁮
 ";
     $keyboard = json_encode([
@@ -2626,7 +2591,7 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $cancelText){
     
     $fid = $payInfo['plan_id'];
     $volume = $payInfo['volume'];
-    $days = $payInfo['day'];
+    $day = $payInfo['day'];
     $uid = $payInfo['user_id'];
 
     $acctxt = '';
@@ -2736,8 +2701,9 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $cancelText){
     alert('🚀 | 😍 در حال ارسال کانفیگ به مشتری ...');
     
     include 'phpqrcode/qrlib.php';
-    $token = RandomString(30);
-    $subLink = $botUrl . "settings/subLink.php?token=" . $token;
+    
+    
+    $smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
 
     $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id);
     foreach($vraylink as $vray_link){
@@ -2746,12 +2712,12 @@ if(preg_match('/accCustom(.*)/',$data, $match) and $text != $cancelText){
 📡 پروتکل: $protocol
 🔮 نام سرویس: $remark
 🔋حجم سرویس: $volume گیگ
-⏰ مدت سرویس: $days روز
+⏰ مدت سرویس: $day روز
 ⁮⁮ ⁮⁮
 💝 config : <code>$vray_link</code>";
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-\n🌐 subscription : <code>$subLink</code>";
+\n🌐 subscription : <code>$smartsubm</code>";
     
         $file = RandomString() .".png";
         $ecc = 'L';
@@ -2975,8 +2941,9 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
     $stmt->execute();
     include 'phpqrcode/qrlib.php';
     delMessage();
-    $token = RandomString(30);
-    $subLink = $botUrl . "settings/subLink.php?token=" . $token;
+    
+    
+    $smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
 
     $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id, $rahgozar);
     foreach($vraylink as $vray_link){
@@ -2990,7 +2957,7 @@ if(preg_match('/payWithWallet(.*)/',$data, $match)){
 💝 config : <code>$vray_link</code>";
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-\n🌐 subscription : <code>$subLink</code>";
+\n🌐 subscription : <code>$smartsubm</code>";
     
         $file = RandomString() .".png";
         $ecc = 'L';
@@ -3099,11 +3066,15 @@ if(preg_match('/payWithCartToCart(.*)/',$data,$match)) {
     
     setUser($data);
     delMessage();
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
 
-✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!",$cancelKey, "HTML");
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+        
+        
+✅ بعد از اینکه پرداختت تایید شد ( لینک سرور ) به صورت خودکار از طریق همین ربات برات ارسال میشه!
+         </b>",$cancelKey, "HTML");
     exit;
 }
 if(preg_match('/payWithCartToCart(.*)/',$userInfo['step'], $match) and $text != $cancelText){
@@ -3177,7 +3148,7 @@ if(preg_match('/payWithCartToCart(.*)/',$userInfo['step'], $match) and $text != 
     }
 }
 if($data=="availableServers"){
-    $stmt = $connection->prepare("SELECT * FROM `server_plans` WHERE `acount` != 0 AND `inbound_id` != 0");
+    $stmt = $connection->prepare("SELECT * FROM `server_plans` WHERE `acount` != 0");
     $stmt->execute();
     $serversList = $stmt->get_result();
     $stmt->close();
@@ -3205,8 +3176,8 @@ if($data=="availableServers"){
             
             $keys[] = [
                 ['text'=>$acount . " اکانت",'callback_data'=>"wizwizch"],
-                ['text'=>$title??" ",'callback_data'=>"wizwizch"],
-                ['text'=>$name??" ",'callback_data'=>"wizwizch"]
+                ['text'=>$title,'callback_data'=>"wizwizch"],
+                ['text'=>$name,'callback_data'=>"wizwizch"]
                 ];
         }
     }
@@ -3215,7 +3186,7 @@ if($data=="availableServers"){
     editText($message_id, "🟢 | موجودی پلن اشتراکی:", $keys);
 }
 if($data=="availableServers2"){
-    $stmt = $connection->prepare("SELECT * FROM `server_plans` WHERE `inbound_id` = 0");
+    $stmt = $connection->prepare("SELECT * FROM `server_info`");
     $stmt->execute();
     $serversList = $stmt->get_result();
     $stmt->close();
@@ -3229,22 +3200,20 @@ if($data=="availableServers2"){
         $days2 = $file_detail2['days'];
         $title2 = $file_detail2['title'];
         $server_id2 = $file_detail2['server_id'];
+        $acount2 = $file_detail2['ucount'];
         $inbound_id2 = $file_detail2['inbound_id'];
-        
-        $stmt = $connection->prepare("SELECT * FROM `server_info` WHERE `id` = ?");
-        $stmt->bind_param("i", $server_id2);
+        $stmt = $connection->prepare("SELECT * FROM `server_info`");
+        $stmt->bind_param("i", $server_id);
         $stmt->execute();
         $name = $stmt->get_result();
         $stmt->close();
 
         if($name->num_rows>0){
-            $sInfo = $name->fetch_assoc();
-            $name = $sInfo['title'];
-            $acount2 = $sInfo['ucount'];
+            $name = $name->fetch_assoc()['title'];
             
             $keys[] = [
                 ['text'=>$acount2 . " اکانت",'callback_data'=>"wizwizch"],
-                ['text'=>$title2??" ",'callback_data'=>"wizwizch"],
+                ['text'=>$title2,'callback_data'=>"wizwizch"],
                 ];
         }
     }
@@ -3376,8 +3345,9 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $cancelText){
         exit;
     }
     alert('🚀 | 😍 در حال ارسال کانفیگ به مشتری ...');
-    $token = RandomString(30);
-    $subLink = $botUrl . "settings/subLink.php?token=" . $token;
+    
+    
+    $smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
 
     include 'phpqrcode/qrlib.php';
     $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id, $rahgozar);
@@ -3392,7 +3362,7 @@ if(preg_match('/accept(.*)/',$data, $match) and $text != $cancelText){
 💝 config : <code>$vray_link</code>";
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-\n🌐 subscription : <code>$subLink</code>";
+\n🌐 subscription : <code>$smartsubm</code>";
     
         $file = RandomString() .".png";
         $ecc = 'L';
@@ -4492,7 +4462,7 @@ if($userInfo['step'] == "banUser" && ($from_id == $admin || $userInfo['isAdmin']
 
 🚪 /start",$adminKeys);
     }else{
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
     }
 }
 if($data=="mainMenuButtons" && ($from_id == $admin || $userInfo['isAdmin'] == true)){
@@ -4561,7 +4531,7 @@ if($userInfo['step'] == "unbanUser" && ($from_id == $admin || $userInfo['isAdmin
 
 🚪 /start",$adminKeys);
     }else{
-        sendMessage("😡 | مگه نمیگم فقط عدد بفرس نمیفهمی؟ یا خودتو زدی به نفهمی؟");
+        sendMessage("😡 | دوست عزیز لطفا مثل آدم فقط عدد ارسال کن برام");
     }
 }
 if(preg_match("/^reply_(.*)/",$data,$match) and  ($from_id == $admin || $userInfo['isAdmin'] == true)){
@@ -4714,8 +4684,9 @@ if(preg_match('/freeTrial(\d+)/',$data,$match)) {
     alert('🚀 | 😍 در حال ارسال کانفیگ به مشتری ...');
     $vraylink = getConnectionLink($server_id, $uniqid, $protocol, $remark, $port, $netType, $inbound_id, $rahgozar);
 	include 'phpqrcode/qrlib.php';
-    $token = RandomString(30);
-    $subLink = $botUrl . "settings/subLink.php?token=" . $token;
+    
+    
+    $smartsubm = "https://subbot3.mygreatwebdevjurney-blog.top/sub-" . $remark . ".txt";
     foreach($vraylink as $vray_link){
         $acc_text = "
 😍 سفارش جدید شما
@@ -4727,7 +4698,7 @@ if(preg_match('/freeTrial(\d+)/',$data,$match)) {
 💝 config : <code>$vray_link</code>";
 if($botState['subLinkState'] == "on") $acc_text .= "
 
-\n🌐 subscription : <code>$subLink</code>";
+\n🌐 subscription : <code>$smartsubm</code>";
     
         $file = RandomString().".png";
         $ecc = 'L';
@@ -4875,26 +4846,23 @@ if($userInfo['step'] == "showAccount" and $text != $cancelText){
                         $emails = array_column($clientState,'email');
                         $emailKey = array_search($email,$emails);                    
              
-                        
                         if($clientState[$emailKey]->total != 0 || $clientState[$emailKey]->up != 0  ||  $clientState[$emailKey]->down != 0 || $clientState[$emailKey]->expiryTime != 0){
                             $upload = sumerize($clientState[$emailKey]->up);
                             $download = sumerize($clientState[$emailKey]->down);
-                            $total = $clientState[$emailKey]->total==0 && $list[$keys]->total !=0?$list[$keys]->total:$clientState[$emailKey]->total;
-                            $leftMb = $total!=0?($total - $clientState[$emailKey]->up - $clientState[$emailKey]->down):"نامحدود";
+                            $leftMb = $clientState[$emailKey]->total!=0?($clientState[$emailKey]->total - $clientState[$emailKey]->up - $clientState[$emailKey]->down):"نامحدود";
                             if(is_numeric($leftMb)){
                                 if($leftMb<0){
                                     $leftMb = 0;
                                 }else{
-                                    $leftMb = sumerize($total - $clientState[$emailKey]->up - $clientState[$emailKey]->down);
+                                    $leftMb = sumerize($clientState[$emailKey]->total - $clientState[$emailKey]->up - $clientState[$emailKey]->down);
                                 }
                             }
                             $totalUsed = sumerize($clientState[$emailKey]->up + $clientState[$emailKey]->down);
-                            $total = $total!=0?sumerize($total):"نامحدود";
-                            $expTime = $clientState[$emailKey]->expiryTime == 0 && $list[$keys]->expiryTime?$list[$keys]->expiryTime:$clientState[$emailKey]->expiryTime;
-                            $expiryTime = $expTime != 0?jdate("Y-m-d H:i:s",substr($expTime,0,-3)):"نامحدود";
-                            $expiryDay = $expTime != 0?
+                            $total = $clientState[$emailKey]->total!=0?sumerize($clientState[$emailKey]->total):"نامحدود";
+                            $expiryTime = $clientState[$emailKey]->expiryTime != 0?jdate("Y-m-d H:i:s",substr($clientState[$emailKey]->expiryTime,0,-3)):"نامحدود";
+                            $expiryDay = $clientState[$emailKey]->expiryTime != 0?
                                 floor(
-                                    ((substr($expTime,0,-3)-time())/(60 * 60 * 24))
+                                    ((substr($clientState[$emailKey]->expiryTime,0,-3)-time())/(60 * 60 * 24))
                                     ):
                                     "نامحدود";
                             if(is_numeric($expiryDay)){
@@ -5227,7 +5195,7 @@ if(preg_match('/(addNewRahgozarPlan|addNewPlan)/',$userInfo['step']) and $text!=
         sendMessage($msg);
     }
     if($step==55 and $text!=$cancelText){
-        if($text != "tcp" && $text != "ws" && $text != "grpc"){
+        if($text != "tcp" && $text != "ws" && $text != grpc){
             sendMessage("لطفا فقط نوع (ws | tcp | grpc) را وارد کنید");
             exit();
         }
@@ -5831,7 +5799,7 @@ if(preg_match('/changeAccProtocol(\d+)_(\d+)_(.*)/', $data,$match)){
     $keys = getOrderDetailKeys($from_id, $oid);
     editText($message_id, $keys['msg'], $keys['keyboard'],"HTML");
 }
-if(preg_match('/^discountRenew(\d+)_(\d+)/',$userInfo['step'], $match) || preg_match('/renewAccount(\d+)/',$data,$match) && $text != $cancelText){
+if(preg_match('/^discountRenew(\d+)_(\d+)/',$userInfo['step'], $match) || preg_match('/renewAccount(\d+)/',$data,$match)){
     if(preg_match('/^discountRenew/', $userInfo['step'])){
         $rowId = $match[2];
         
@@ -5987,9 +5955,13 @@ if(preg_match('/^discountRenew(\d+)_(\d+)/',$userInfo['step'], $match) || preg_m
 if(preg_match('/payRenewWithCartToCart(.*)/',$data,$match)) {
     setUser($data);
     delMessage();
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
+
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+        
+         </b>
 
 ",$cancelKey,"html");
     exit;
@@ -6533,9 +6505,14 @@ if(preg_match('/selectPlanDayIncrease(.+)_(.+)_(.+)_(.+)/',$data,$match)){
 if(preg_match('/payIncreaseDayWithCartToCart(.*)/',$data,$match)) {
     delMessage();
     setUser($data);
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
+
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+        
+        
+         </b>
 
 ",$cancelKey,"html");
     exit;
@@ -6847,10 +6824,14 @@ if(preg_match('/increaseVolumePlan(.+)_(.+)_(.+)_(.+)/',$data,$match)){
 if(preg_match('/payIncreaseWithCartToCart(.*)/',$data)) {
     setUser($data);
     delMessage();
-    sendMessage("♻️ عزیزم یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :
+    sendMessage("<b>🔰 - مبلغ مورد نظر را به شماره کارتی که دارید واریز کنید و سپس یه تصویر از فیش واریزی یا شماره پیگیری -  ساعت پرداخت - نام پرداخت کننده رو در یک پیام برام ارسال کن :  
 
-🔰 <code>{$paymentKeys['bankAccount']}</code> - {$paymentKeys['holderName']}
 
+♻️اگر شماره کارت ندارید به آیدی زیر پیام بدید...(فقط آشنا)👇🏻
+🆔 @mmdslmkhobi
+        
+    
+         </b>
 ",$cancelKey, "html");
     exit;
 }
@@ -7536,7 +7517,6 @@ if(preg_match('/^changesServerLoginInfo(\d+)/',$userInfo['step'],$match) && $tex
     $data['panel_url'] = $text;
     setUser('editServerPaneUser' . json_encode($data, JSON_UNESCAPED_UNICODE));
     sendMessage( "▪️لطفا یوزر پنل را وارد کنید:",$cancelKey);
-    exit();
 }
 if(preg_match('/^editServerPaneUser(.*)/',$userInfo['step'],$match) && $text != $cancelText) {
     $data = json_decode($match[1],true);
@@ -7810,9 +7790,8 @@ if($data == "managePanel" and (($from_id == $admin || $userInfo['isAdmin'] == tr
     setUser();
     $msg = "
 👤 عزیزم به بخش مدیریت خوشومدی 
-🤌 هرچی نیاز داشتی میتونی اینجا طبق نیازهات اضافه و تغییر بدی ، عزیزم $first_name جان اگه از فروش ربات درآمد داری از من حمایت کن تا پروژه همیشه آپدیت بمونه !
+🤌 هرچی نیاز داشتی میتونی اینجا طبق نیازهات اضافه و تغییر بدی ، عزیزم 
 
-🆔 @wizwizch
 
 🚪 /start
 ";
@@ -7825,13 +7804,13 @@ if($data == 'reciveApplications') {
     $stmt->close();
 
     $keyboard = [];
-    while($file =  $respd->fetch_assoc()){ 
+    while($file =  $respd->fetch_assoc()){
         $link = $file['link'];
         $title = $file['title'];
         $keyboard[] = ['text' => "$title", 'url' => $link];
     }
     $keyboard[] = ['text'=>"⤵️ برگرد صفحه قبلی ",'callback_data'=>"mainMenu"];
-    $keyboard = array_chunk($keyboard,1); 
+    $keyboard = array_chunk($keyboard,1);
     editText($message_id, "
 🔸می توانید به راحتی همه فایل ها را (به صورت رایگان) دریافت کنید
 📌 شما میتوانید برای راهنمای اتصال به سرویس کانال رسمی مارا دنبال کنید و همچنین از دکمه های زیر میتوانید برنامه های مورد نیاز هر سیستم عامل را دانلود کنید
